@@ -1,97 +1,50 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>मेरो वेबसाइट</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
-            color: #333;
-        }
-
-        header {
-            background: #2563eb;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            background: #1e40af;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-
-        footer {
-            margin-top: 50px;
-            background: #111827;
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+  <title>Simple Form</title>
 </head>
 <body>
 
-    <header>
-        <h1>मेरो वेबसाइटमा स्वागत छ</h1>
-    </header>
+<h2>Contact Form</h2>
 
-    <nav>
-        <a href="#">होम</a>
-        <a href="#">हाम्रो बारेमा</a>
-        <a href="#">सेवा</a>
-        <a href="#">सम्पर्क</a>
-    </nav>
+<form id="myForm">
+  <input type="text" name="name" placeholder="Your Name" required><br><br>
+  <input type="text" name="phone" placeholder="Your Phone" required><br><br>
+  <button type="submit">Submit</button>
+</form>
 
-    <section class="hero">
-        <h1>Hello World 👋</h1>
-        <p>यो GitHub Pages मा host गरिएको एउटा साधारण वेबसाइट हो।</p>
-        <a href="#" class="btn">थप जानकारी</a>
-    </section>
+<p id="msg"></p>
 
-    <footer>
-        <p>&copy; 2026 मेरो वेबसाइट. सबै अधिकार सुरक्षित।</p>
-    </footer>
+<script>
+const scriptURL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+
+document.getElementById("myForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let formData = {
+    name: this.name.value,
+    phone: this.phone.value
+  };
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.text())
+  .then(data => {
+    if(data === "Success"){
+      document.getElementById("msg").innerText = "✅ Form submitted successfully!";
+      document.getElementById("myForm").reset();
+    } else {
+      document.getElementById("msg").innerText = "❌ Failed!";
+    }
+  })
+  .catch(error => {
+    document.getElementById("msg").innerText = "❌ Error!";
+  });
+
+});
+</script>
 
 </body>
 </html>
