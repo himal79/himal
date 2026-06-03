@@ -1,23 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Simple Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Form</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    form input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    form input:focus {
+      border-color: #2575fc;
+      outline: none;
+      box-shadow: 0 0 8px rgba(37,117,252,0.4);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #2575fc, #6a11cb);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      transform: scale(1.05);
+    }
+
+    #msg {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<h2>Contact Form</h2>
+<div class="container">
+  <h2>📩 Submit Here</h2>
 
-<form id="myForm">
-  <input type="text" name="name" placeholder="Your Name" required><br><br>
-  <input type="text" name="phone" placeholder="Your Phone" required><br><br>
-  <input type="text" name="address" placeholder="Your Phone" required><br><br>
-  <button type="submit">Submit</button>
-</form>
+  <form id="myForm">
+    <input type="text" name="name" placeholder="Full Name" required>
+    <input type="text" name="phone" placeholder="Phone Number" required>
+    <input type="text" name="address" placeholder="Address" required>
+    <button type="submit">Submit</button>
+  </form>
 
-<p id="msg"></p>
+  <p id="msg"></p>
+</div>
 
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbyqXHghYKaQfSSPLRik5np3tL6ubA3X1_a7CNNwf3Dl4rY488eSNXNHQTua6isr4SVe/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbyqXHghYKaQfSSPLRik5np3tL6ubA3X1_a7CNNwf3Dl4rY488eSNXNHQTua6isr4SVe/exec"; // Replace with your Google Apps Script URL
 
 document.getElementById("myForm").addEventListener("submit", function(e){
   e.preventDefault();
@@ -36,13 +127,16 @@ document.getElementById("myForm").addEventListener("submit", function(e){
   .then(data => {
     if(data === "Success"){
       document.getElementById("msg").innerText = "✅ Form submitted successfully!";
+      document.getElementById("msg").style.color = "green";
       document.getElementById("myForm").reset();
     } else {
       document.getElementById("msg").innerText = "❌ Failed!";
+      document.getElementById("msg").style.color = "red";
     }
   })
   .catch(error => {
     document.getElementById("msg").innerText = "❌ Error!";
+    document.getElementById("msg").style.color = "red";
   });
 
 });
@@ -50,3 +144,4 @@ document.getElementById("myForm").addEventListener("submit", function(e){
 
 </body>
 </html>
+
