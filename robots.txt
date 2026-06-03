@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://himalthapa.com/sitemap.xml
