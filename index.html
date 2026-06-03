@@ -126,14 +126,16 @@ document.getElementById("myForm").addEventListener("submit", function(e){
   .then(response => response.text())
   .then(data => {
     if(data === "Success"){
-      document.getElementById("msg").innerText = "✅ Form submitted successfully!";
-      document.getElementById("msg").style.color = "green";
-      document.getElementById("myForm").reset();
-      // 3 second पछि message हटाउने
+  document.getElementById("msg").innerText = "✅ Form submitted successfully!";
+  document.getElementById("msg").style.color = "green";
+  document.getElementById("myForm").reset();
+
+  // 3 second पछि message हटाउने
   setTimeout(() => {
     document.getElementById("msg").innerText = "";
   }, 3000);
-    } else {
+}
+ else {
       document.getElementById("msg").innerText = "❌ Failed!";
       document.getElementById("msg").style.color = "red";
     }
