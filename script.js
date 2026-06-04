@@ -1,22 +1,4 @@
 /* ============================================
-   Configuration - Social Media Links
-   Replace these with your actual URLs
-   ============================================ */
-const CONFIG = {
-    social: {
-        facebook: 'FACEBOOK_URL',
-        youtube: 'YOUTUBE_URL',
-        tiktok: 'TIKTOK_URL',
-        instagram: 'INSTAGRAM_URL',
-        github: 'GITHUB_URL',
-        linkedin: 'LINKEDIN_URL',
-        email: 'EMAIL_ADDRESS',
-        whatsapp: 'YOUR_NUMBER'
-    },
-    resume: 'path/to/resume.pdf'
-};
-
-/* ============================================
    Initialize AOS Animation Library
    ============================================ */
 AOS.init({
@@ -33,6 +15,7 @@ const loader = document.getElementById('loader');
 const scrollProgress = document.getElementById('scrollProgress');
 const backToTop = document.getElementById('backToTop');
 const themeToggle = document.getElementById('themeToggle');
+const langToggle = document.getElementById('langToggle');
 const navbar = document.getElementById('navbar');
 const navMenu = document.getElementById('navMenu');
 const hamburger = document.getElementById('hamburger');
@@ -52,9 +35,151 @@ const testimonialTrack = document.querySelector('.testimonial-track');
 const testimonialDots = document.getElementById('testimonialDots');
 
 /* ============================================
+   Language State Management
+   ============================================ */
+let currentLanguage = localStorage.getItem('language') || CONFIG.settings.defaultLanguage;
+
+/* ============================================
+   Language Switching Function
+   ============================================ */
+function switchLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    
+    // Update HTML lang attribute
+    document.documentElement.lang = lang;
+    
+    // Update all translatable elements
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        const translation = getTranslation(key);
+        if (translation) {
+            element.textContent = translation;
+        }
+    });
+    
+    // Update language toggle button
+    updateLangToggle();
+    
+    // Update typing animation words
+    updateTypingWords();
+    
+    // Update form placeholders
+    updateFormPlaceholders();
+    
+    // Update filter buttons
+    updateFilterButtons();
+}
+
+/* ============================================
+   Get Translation Function
+   ============================================ */
+function getTranslation(key) {
+    const keys = key.split('.');
+    let value = CONFIG.translations[currentLanguage];
+    
+    for (const k of keys) {
+        if (value && value[k]) {
+            value = value[k];
+        } else {
+            return null;
+        }
+    }
+    
+    return value;
+}
+
+/* ============================================
+   Update Language Toggle Button
+   ============================================ */
+function updateLangToggle() {
+    const langCurrent = langToggle.querySelector('.lang-current');
+    const langSwitch = langToggle.querySelector('.lang-switch');
+    
+    if (currentLanguage === 'ne') {
+        langCurrent.textContent = 'ने';
+        langSwitch.textContent = '/ EN';
+    } else {
+        langCurrent.textContent = 'EN';
+        langSwitch.textContent = '/ ने';
+    }
+}
+
+/* ============================================
+   Update Typing Words
+   ============================================ */
+function updateTypingWords() {
+    typingWords = CONFIG.translations[currentLanguage].hero.typing;
+}
+
+/* ============================================
+   Update Form Placeholders
+   ============================================ */
+function updateFormPlaceholders() {
+    const t = CONFIG.translations[currentLanguage].contact;
+    
+    document.getElementById('name').placeholder = t.namePlaceholder;
+    document.getElementById('email').placeholder = t.emailPlaceholder;
+    document.getElementById('subject').placeholder = t.subjectPlaceholder;
+    document.getElementById('message').placeholder = t.messagePlaceholder;
+    
+    // Update labels
+    document.querySelector('label[for="name"]').textContent = t.name;
+    document.querySelector('label[for="email"]').textContent = t.emailLabel;
+    document.querySelector('label[for="subject"]').textContent = t.subject;
+    document.querySelector('label[for="message"]').textContent = t.message;
+}
+
+/* ============================================
+   Update Filter Buttons
+   ============================================ */
+function updateFilterButtons() {
+    const t = CONFIG.translations[currentLanguage].portfolio;
+    
+    filterBtns.forEach(btn => {
+        const filter = btn.getAttribute('data-filter');
+        switch (filter) {
+            case 'all':
+                btn.textContent = t.all;
+                break;
+            case 'web':
+                btn.textContent = t.web;
+                break;
+            case 'app':
+                btn.textContent = t.app;
+                break;
+            case 'uiux':
+                btn.textContent = t.uiux;
+                break;
+            case 'software':
+                btn.textContent = t.software;
+                break;
+        }
+    });
+}
+
+/* ============================================
+   Language Toggle Click Handler
+   ============================================ */
+langToggle.addEventListener('click', () => {
+    const newLang = currentLanguage === 'ne' ? 'en' : 'ne';
+    switchLanguage(newLang);
+});
+
+/* ============================================
+   Initialize Language on Page Load
+   ============================================ */
+function initializeLanguage() {
+    switchLanguage(currentLanguage);
+}
+
+/* ============================================
    Loading Animation
    ============================================ */
 window.addEventListener('load', () => {
+    // Initialize language on page load
+    initializeLanguage();
+    
     setTimeout(() => {
         loader.classList.add('hidden');
     }, 1000);
@@ -205,13 +330,7 @@ createParticles();
 /* ============================================
    Typing Animation
    ============================================ */
-const typingWords = [
-    'IT Engineer',
-    'Web Developer',
-    'Software Developer',
-    'Tech Enthusiast',
-    'Problem Solver'
-];
+let typingWords = CONFIG.translations[currentLanguage].hero.typing;
 
 let wordIndex = 0;
 let charIndex = 0;
@@ -421,6 +540,7 @@ contactForm.addEventListener('submit', (e) => {
     
     let isValid = true;
     const formData = new FormData(contactForm);
+    const t = CONFIG.translations[currentLanguage].validation;
     
     // Reset errors
     document.querySelectorAll('.form-group').forEach(group => {
@@ -431,7 +551,7 @@ contactForm.addEventListener('submit', (e) => {
     // Validate name
     const name = formData.get('name');
     if (name.trim().length < 2) {
-        showError('name', 'Name must be at least 2 characters');
+        showError('name', t.nameRequired);
         isValid = false;
     }
     
@@ -439,27 +559,27 @@ contactForm.addEventListener('submit', (e) => {
     const email = formData.get('email');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        showError('email', 'Please enter a valid email address');
+        showError('email', t.emailInvalid);
         isValid = false;
     }
     
     // Validate subject
     const subject = formData.get('subject');
     if (subject.trim().length < 3) {
-        showError('subject', 'Subject must be at least 3 characters');
+        showError('subject', t.subjectRequired);
         isValid = false;
     }
     
     // Validate message
     const message = formData.get('message');
     if (message.trim().length < 10) {
-        showError('message', 'Message must be at least 10 characters');
+        showError('message', t.messageRequired);
         isValid = false;
     }
     
     if (isValid) {
         // In production, send form data to server
-        alert('Message sent successfully! (Demo mode)');
+        alert(CONFIG.translations[currentLanguage].contact.successMessage);
         contactForm.reset();
     }
 });
@@ -493,7 +613,7 @@ function openSocialApp(platform, fallbackUrl) {
             appUrl = 'snssdk1233://';
             break;
         case 'whatsapp':
-            appUrl = `whatsapp://send?phone=${CONFIG.social.whatsapp}&text=Hy`;
+            appUrl = `whatsapp://send?phone=${CONFIG.personal.whatsapp}&text=Hy`;
             break;
         default:
             window.open(fallbackUrl, '_blank');
@@ -536,7 +656,7 @@ document.querySelectorAll('[data-social]').forEach(element => {
                 openSocialApp('tiktok', CONFIG.social.tiktok);
                 break;
             case 'whatsapp':
-                openSocialApp('whatsapp', `https://wa.me/${CONFIG.social.whatsapp}?text=Hy`);
+                openSocialApp('whatsapp', `https://wa.me/${CONFIG.personal.whatsapp}?text=Hy`);
                 break;
             case 'github':
                 window.open(CONFIG.social.github, '_blank');
@@ -552,13 +672,13 @@ document.querySelectorAll('[data-social]').forEach(element => {
 
 // Replace email placeholders
 document.querySelectorAll('a[href="mailto:EMAIL_ADDRESS"]').forEach(link => {
-    link.href = `mailto:${CONFIG.social.email}`;
-    link.textContent = CONFIG.social.email;
+    link.href = `mailto:${CONFIG.personal.email}`;
+    link.textContent = CONFIG.personal.email;
 });
 
 // WhatsApp button handler
 document.querySelectorAll('[data-social="whatsapp"]').forEach(link => {
-    link.href = `https://wa.me/${CONFIG.social.whatsapp}?text=Hy`;
+    link.href = `https://wa.me/${CONFIG.personal.whatsapp}?text=Hy`;
 });
 
 /* ============================================
@@ -567,7 +687,7 @@ document.querySelectorAll('[data-social="whatsapp"]').forEach(link => {
 document.getElementById('resumeBtn').addEventListener('click', (e) => {
     e.preventDefault();
     // In production, replace with actual resume path
-    window.open(CONFIG.resume, '_blank');
+    window.open(CONFIG.assets.resume, '_blank');
 });
 
 /* ============================================

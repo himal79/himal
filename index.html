@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +29,9 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     
+    <!-- Config File -->
+    <script src="config.js"></script>
+    
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
@@ -47,7 +50,7 @@
     <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-spinner"></div>
-            <p>Loading...</p>
+            <p data-i18n="loading">लोड हुँदैछ...</p>
         </div>
     </div>
 
@@ -59,11 +62,6 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <i class="fas fa-moon"></i>
-        <i class="fas fa-sun"></i>
-    </button>
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -73,17 +71,28 @@
             </a>
             
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
-                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#education" class="nav-link">Education</a></li>
-                <li><a href="#certifications" class="nav-link">Certifications</a></li>
-                <li><a href="#blog" class="nav-link">Blog</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#home" class="nav-link active" data-i18n="nav.home">गृह</a></li>
+                <li><a href="#about" class="nav-link" data-i18n="nav.about">बारेमा</a></li>
+                <li><a href="#skills" class="nav-link" data-i18n="nav.skills">सीपहरू</a></li>
+                <li><a href="#services" class="nav-link" data-i18n="nav.services">सेवाहरू</a></li>
+                <li><a href="#portfolio" class="nav-link" data-i18n="nav.portfolio">पोर्टफोलियो</a></li>
+                <li><a href="#experience" class="nav-link" data-i18n="nav.experience">अनुभव</a></li>
+                <li><a href="#education" class="nav-link" data-i18n="nav.education">शिक्षा</a></li>
+                <li><a href="#certifications" class="nav-link" data-i18n="nav.certifications">प्रमाणपत्रहरू</a></li>
+                <li><a href="#blog" class="nav-link" data-i18n="nav.blog">ब्लग</a></li>
+                <li><a href="#contact" class="nav-link" data-i18n="nav.contact">सम्पर्क</a></li>
             </ul>
+            
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                    <span class="lang-current">ने</span>
+                    <span class="lang-switch">/ EN</span>
+                </button>
+            </div>
             
             <button class="hamburger" id="hamburger" aria-label="Toggle menu">
                 <span></span>
