@@ -186,6 +186,17 @@ window.addEventListener('load', () => {
 });
 
 /* ============================================
+   Sticky Navbar Scroll Effect
+   ============================================ */
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+/* ============================================
    Scroll Progress Indicator
    ============================================ */
 window.addEventListener('scroll', () => {

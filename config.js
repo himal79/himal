@@ -8,9 +8,18 @@ const CONFIG = {
     // Personal Information
     // ============================================
     personal: {
-        name: 'Himal Thapa',
-        profession: 'IT Engineer',
-        location: 'Kathmandu, Nepal',
+        name: {
+            ne: 'हिमाल थापा',
+            en: 'Himal Thapa'
+        },
+        profession: {
+            ne: 'आईटी इन्जिनियर',
+            en: 'IT Engineer'
+        },
+        location: {
+            ne: 'काठमाडौं, नेपाल',
+            en: 'Kathmandu, Nepal'
+        },
         email: 'hthapa208@gmail.com',
         phone: '+977 9851214522',
         whatsapp: '9779851214522'
@@ -89,6 +98,13 @@ const CONFIG = {
                 downloadResume: 'रिज्यूमे डाउनलोड गर्नुहोस्',
                 hireMe: 'मलाई हायर गर्नुहोस्',
                 scrollDown: 'तल स्क्रोल गर्नुहोस्'
+            },
+            
+            // Personal Information
+            personal: {
+                name: 'हिमाल थापा',
+                profession: 'आईटी इन्जिनियर',
+                location: 'काठमाडौं, नेपाल'
             },
             
             // About Section
@@ -268,6 +284,13 @@ const CONFIG = {
                 downloadResume: 'Download Resume',
                 hireMe: 'Hire Me',
                 scrollDown: 'Scroll Down'
+            },
+            
+            // Personal Information
+            personal: {
+                name: 'Himal Thapa',
+                profession: 'IT Engineer',
+                location: 'Kathmandu, Nepal'
             },
             
             // About Section
