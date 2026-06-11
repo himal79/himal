@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-Allow: /config.js
-Allow: /style.css
-Allow: /script.js
-
-Sitemap: https://himalthapa.com/sitemap.xml
