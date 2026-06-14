@@ -329,7 +329,7 @@ body:has(button:hover) #cursor-ring {
 }
 @keyframes fadeInRight { from{opacity:0;transform:translateX(50px)} to{opacity:1;transform:translateX(0)} }
 
-.avatar-frame { position: relative; width: 320px; height: 320px; }
+.avatar-frame { position: relative; width: 420px; height: 420px; }
 
 .avatar-ring {
   position: absolute; border-radius: 50%; inset: 0;
@@ -386,9 +386,9 @@ body:has(button:hover) #cursor-ring {
   animation: floatTag 4s ease-in-out infinite;
   box-shadow: var(--card-shadow);
 }
-.tag-1 { top: 0; right: -20px; animation-delay: 0s; }
+.tag-1 { top: 0; right: -10px; animation-delay: 0s; }
 .tag-2 { top: 50%; right: -35px; transform: translateY(-50%); animation-delay: -1.5s; }
-.tag-3 { bottom: 30px; right: -10px; animation-delay: -3s; }
+.tag-3 { bottom: 30px; right: -40px; animation-delay: -3s; }
 @keyframes floatTag { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 .tag-2 { animation: floatTag2 4s ease-in-out infinite; }
 .tag-2:nth-child(n) { animation-delay: -1.5s; }

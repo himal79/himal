@@ -65,14 +65,19 @@ const TRANSLATIONS = {
     hero_greeting: 'नमस्ते, म हुँ',
     hero_name_np:  'हिमाल थापा<br/><small class="hero-subtitle">IT इन्जिनियर</small>',
     hero_name_en:  'Himal Thapa<br/><small class="hero-subtitle">IT Engineer</small>',
-    hero_bio:      'सुन्दर कोड र आकर्षक डिजाइन मिलाएर अद्भुत डिजिटल अनुभव निर्माण गर्दछु। एक–एक पिक्सेलमा सपना साकार पार्दछु।',
+    hero_bio:      'रचनात्मक डिजिटल सामग्री, स्मार्ट IT समाधान र विश्लेषणात्मक सोचको संयोजनले उत्कृष्ट डिजिटल अनुभव निर्माण गर्दछु। प्रत्येक समस्यालाई अवसरमा बदल्दै डिजिटल संसारमा नयाँ सम्भावना सिर्जना पार्दछु।',
     btn_resume:    'CV डाउनलोड',
     btn_hire:      'काममा लगाउनुहोस्',
     btn_work:      'मेरो काम',
     badge_open:    'काममा उपलब्ध',
+    badge_open1:    ' डिजिटल सामग्री सिर्जनाकर्ता',
+    badge_open2:    ' आईटी परामर्शदाता',
+    badge_open3:    ' सामाजिक सञ्जाल विशेषज्ञ',
+
+    
 
     /* ✏ Typed rotating words */
-    typed_words: ['IT इन्जिनियर', 'वेब डेभलपर', 'सफ्टवेयर डेभलपर', 'प्रविधि उत्साही', 'समस्या समाधानकर्ता'],
+    typed_words: ['आईटी परामर्शदाता', 'समस्या समाधानकर्ता', 'डिजिटल सामग्री सिर्जनाकर्ता', 'वेब डेभलपर', 'सफ्टवेयर डेभलपर', 'सामाजिक सञ्जाल विशेषज्ञ'],
 
     /* About */
     about_label:      'परिचय',
@@ -271,14 +276,17 @@ const TRANSLATIONS = {
     nav_experience: 'Experience', nav_education: 'Education',
     nav_certs: 'Certs', nav_blog: 'Blog', nav_contact: 'Contact',
 
-    hero_greeting: "Hello World, I'm",
+    hero_greeting: "Hello, I'm",
     hero_name_np:  'हिमाल थापा<br/><small class="hero-subtitle">IT इन्जिनियर</small>',
     hero_name_en:  'Himal Thapa<br/><small class="hero-subtitle">IT Engineer</small>',
-    hero_bio:    'Crafting digital experiences that blend elegant code with stunning design. Turning ideas into reality, one pixel at a time.',
+    hero_bio:    'By combining creative digital content, smart IT solutions, and analytical thinking, I create great digital experiences. I transform every problem into an opportunity and bring new possibilities to the digital world.',
     btn_resume:  'Resume', btn_hire: 'Hire Me', btn_work: 'My Work',
     badge_open:  'Open to Work',
+    badge_open1:    ' Digital Creator',
+    badge_open2:    ' IT Consultant',
+    badge_open3:    ' Social Media Specialist',
 
-    typed_words: ['IT Engineer', 'Web Developer', 'Software Developer', 'Tech Enthusiast', 'Problem Solver'],
+    typed_words: ['IT Consultant', 'Problem Solver', 'Digital Creator', 'Web Developer', 'Software Developer', 'Social Media Specialist'],
 
     about_label: 'Get To Know', about_title: 'About ', about_title_span: 'Me',
     about_exp_num:   '3+',
