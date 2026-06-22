@@ -60,6 +60,9 @@ const TRANSLATIONS = {
     nav_certs:      'प्रमाणपत्र',
     nav_blog:       'ब्लग',
     nav_contact:    'सम्पर्क',
+  
+    
+
 
     /* Hero */
     hero_greeting: 'नमस्ते, म हुँ',
@@ -152,16 +155,18 @@ const TRANSLATIONS = {
     exp_label:      'मेरो यात्रा',
     exp_title_work: 'कार्य',
     exp_title:      'अनुभव',
-    exp1_title:     'जुनियर IT इन्जिनियर',
-    exp1_year:      '२०२३ – हालसम्म',
-    exp1_desc:      'वेब एप्लिकेशन विकास र मर्मत, IT सहयोग प्रदान र विभिन्न उद्योगका ग्राहकहरूका लागि प्राविधिक समाधान कार्यान्वयन।',
-    exp2_title:     'वेब डेभलपर इन्टर्न',
-    exp2_year:      '२०२२ – २०२३',
-    exp2_desc:      'प्रतिक्रियाशील वेबसाइट र एप्लिकेशन निर्माण, डिजाइन टिमसँग सहकार्य र आधुनिक विकास कार्यप्रवाहमा व्यावहारिक अनुभव।',
-    exp3_title:     'स्वतन्त्र डेभलपर',
-    exp3_company:   'स्वरोजगार',
-    exp3_year:      '२०२१ – २०२२',
-    exp3_desc:      'स्थानीय व्यवसायहरूका लागि अनुकूलित वेब समाधान प्रदान गरी उनीहरूको डिजिटल उपस्थिति र सञ्चालन दक्षता सुधार।',
+    exp1_title:     'IT इन्जिनियर',
+    exp1_company:   'सनातन मिडिया ग्रुप',
+    exp1_year:      '२०८२ – हालसम्म',
+    exp1_desc:      'IT समर्थन तथा समस्या समाधानमा नेतृत्व प्रदान गर्दै प्रणाली व्यवस्थापन र नेटवर्क समाधानलाई सुदृढ बनाएको। साथै भिडियो सम्पादन, ग्राफिक डिजाइन, सामग्री निर्माण र योजना गर्दै मिडिया कम्पनीको डिजिटल उपस्थिति र सञ्चार दक्षता विस्तार गरेको। वेब तथा सफ्टवेयर विकासमार्फत प्राविधिक संरचना अझ मजबुत बनाएको।',
+    exp2_title:     'फ्रीलान्स सेवा',
+    exp2_company:   'स्वरोजगार',
+    exp2_year:      '२०७६ – हालसम्म',
+    exp2_desc:      'स्वतन्त्र रूपमा स्थानीय व्यवसायहरूका लागि IT समर्थन तथा समस्या समाधान प्रदान गर्दै सञ्चालन दक्षता सुधार गरेको। सामग्री निर्माण, योजना, सामाजिक सञ्जाल व्यवस्थापन र डिजिटल डिजाइनमार्फत व्यवसायहरूको डिजिटल उपस्थिति विस्तार गरेको। फ्रन्टएन्ड, ब्याकएन्ड र डेटाबेसमा दक्षता प्रयोग गर्दै वेब तथा सफ्टवेयर समाधान विकास गरेको।',
+    exp3_title:     'IT विभाग',
+    exp3_company:   'सनातन मोर्चा & राष्ट्रवादी केन्द्र',
+    exp3_year:      '२०७२ – हालसम्म',
+    exp3_desc:      'IT समर्थन, प्रणाली स्थापना र नेटवर्क समाधानमा योगदान दिँदै संगठनको प्राविधिक क्षमता बढाएको। सामाजिक सञ्जाल सञ्चालन, सामग्री व्यवस्थापन, विश्लेषणात्मक सहकार्य र अन्तरक्रियाद्वारा संगठनको गतिविधि प्रभावकारी बनाएको। वेब तथा सफ्टवेयर विकास प्रयोग गर्दै डिजिटल उपस्थितिलाई अझ मजबुत बनाएको।',
 
     /* Education */
     edu_label:    'शैक्षिक पृष्ठभूमि',
@@ -340,12 +345,12 @@ const TRANSLATIONS = {
     proj6_desc:  'Real-time weather app with forecasts and interactive charts.',
 
     exp_label: 'My Journey', exp_title_work: 'Work', exp_title: 'Experience',
-    exp1_title: 'Junior IT Engineer', exp1_year: '2023 – Present',
-    exp1_desc:  'Developing and maintaining web applications, providing IT support, and implementing technical solutions for clients across various industries.',
-    exp2_title: 'Web Developer Intern', exp2_year: '2022 – 2023',
-    exp2_desc:  'Built responsive websites and web applications, collaborated with design teams, and gained hands-on experience in modern development workflows.',
-    exp3_title: 'Freelance Developer', exp3_company: 'Self-Employed', exp3_year: '2021 – 2022',
-    exp3_desc:  'Delivered custom web solutions for local businesses, improving their digital presence and operational efficiency.',
+    exp1_title: 'IT Engineer', exp1_year: '2026 – Present', exp1_company:'Sanatan Media Group',
+    exp1_desc:  "Strengthened systems management and network solutions by providing leadership in IT support and problem solving. Expanded the media company's digital presence and communications capabilities through video editing, graphic design, content creation and planning. Strengthened the technical infrastructure through web and software development.",
+    exp2_title: 'Freelance service', exp2_year: '2020 – Present',exp2_company:'Self-employed',
+    exp2_desc:  'Independently provided IT support and troubleshooting for local businesses, improving operational efficiency. Expanded businesses digital presence through content creation, planning, social media management, and digital design. Developed web and software solutions using expertise in frontend, backend, and databases.',
+    exp3_title: 'IT Department', exp3_company: 'Sanatan Morcha & Rastrabadi Kendra', exp3_year: '2016 – Present',
+    exp3_desc:  "Contributed to IT support, system installation, and network solutions, increasing the organization's technical capabilities. Made the organization's activities more effective through social media operations, content management, analytical collaboration, and interaction. Strengthened the digital presence using web and software development.",
 
     edu_label: 'Academic Background', edu_title_my: 'My', edu_title: 'Education',
     edu1_year: 'Bachelor', edu1_title: 'IT Engineering',
@@ -899,7 +904,7 @@ function restartTyped(words) {
 ================================================================ */
 const CERT_DATA = [
   { icon: '<i class="fab fa-aws"></i>',        title: 'AWS Cloud Practitioner',     issuer: 'Amazon Web Services',       year: '2023' },
-  { icon: '<i class="fab fa-google"></i>',     title: 'Google IT Support',          issuer: 'Google / Coursera',         year: '2023' },
+  { icon: '<i class="fab fa-google"></i>',     title: 'IT Support',          issuer: 'Google / Coursera',         year: '2023' },
   { icon: '<i class="fab fa-react"></i>',      title: 'React Developer Certificate',issuer: 'Meta / Coursera',           year: '2022' },
   { icon: '<i class="fab fa-node-js"></i>',    title: 'Node.js Certification',      issuer: 'OpenJS Foundation',         year: '2022' },
   { icon: '<i class="fas fa-shield-alt"></i>', title: 'Cybersecurity Essentials',   issuer: 'Cisco Networking Academy',  year: '2021' },
