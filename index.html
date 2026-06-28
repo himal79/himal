@@ -551,33 +551,43 @@
     </div>
     <div class="cert-grid">
       <div class="cert-card" data-aos="fade-up" data-aos-delay="100" onclick="openCertModal(0)" role="button" tabindex="0" aria-label="AWS Cloud Practitioner certificate">
-        <div class="cert-preview" aria-hidden="true"><i class="fab fa-aws"></i></div>
-        <div class="cert-info"><h4>AWS Cloud Practitioner</h4><p>Amazon Web Services</p><span>2023</span></div>
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-headset"></i></div>
+        <div class="cert-info"><h4>IT Consulting & Support</h4><p>HP LIFE</p><span>2023</span></div>
         <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
       </div>
       <div class="cert-card" data-aos="fade-up" data-aos-delay="150" onclick="openCertModal(1)" role="button" tabindex="0" aria-label="Google IT Support certificate">
-        <div class="cert-preview" aria-hidden="true"><i class="fab fa-google"></i></div>
-        <div class="cert-info"><h4>IT Support</h4><p>Google / Coursera</p><span>2023</span></div>
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-network-wired"></i></div>
+        <div class="cert-info"><h4>Computer Hardware & Networking</h4><p>Cisco Networking Academy</p><span>2023</span></div>
         <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
       </div>
       <div class="cert-card" data-aos="fade-up" data-aos-delay="200" onclick="openCertModal(2)" role="button" tabindex="0" aria-label="React Developer certificate">
-        <div class="cert-preview" aria-hidden="true"><i class="fab fa-react"></i></div>
-        <div class="cert-info"><h4>React Developer Certificate</h4><p>Meta / Coursera</p><span>2022</span></div>
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-hashtag"></i></div>
+        <div class="cert-info"><h4>Social Media Marketing</h4><p>HubSpot Academy</p><span>2022</span></div>
         <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
       </div>
       <div class="cert-card" data-aos="fade-up" data-aos-delay="250" onclick="openCertModal(3)" role="button" tabindex="0" aria-label="Node.js Certification">
-        <div class="cert-preview" aria-hidden="true"><i class="fab fa-node-js"></i></div>
-        <div class="cert-info"><h4>Node.js Certification</h4><p>OpenJS Foundation</p><span>2022</span></div>
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-bullhorn"></i></div>
+        <div class="cert-info"><h4>Content Marketing</h4><p>HubSpot Academy</p><span>2022</span></div>
         <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
       </div>
       <div class="cert-card" data-aos="fade-up" data-aos-delay="300" onclick="openCertModal(4)" role="button" tabindex="0" aria-label="Cybersecurity Essentials certificate">
-        <div class="cert-preview" aria-hidden="true"><i class="fas fa-shield-alt"></i></div>
-        <div class="cert-info"><h4>Cybersecurity Essentials</h4><p>Cisco Networking Academy</p><span>2021</span></div>
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-palette"></i></div>
+        <div class="cert-info"><h4>Graphic Design Essentials</h4><p>Canva Design School</p><span>2021</span></div>
         <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
       </div>
       <div class="cert-card" data-aos="fade-up" data-aos-delay="350" onclick="openCertModal(5)" role="button" tabindex="0" aria-label="Git and GitHub Mastery certificate">
-        <div class="cert-preview" aria-hidden="true"><i class="fab fa-git-alt"></i></div>
-        <div class="cert-info"><h4>Git &amp; GitHub Mastery</h4><p>Udemy</p><span>2021</span></div>
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-code"></i></div>
+        <div class="cert-info"><h4>Web Development</h4><p>freeCodeCamp</p><span>2021</span></div>
+        <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="cert-card" data-aos="fade-up" data-aos-delay="350" onclick="openCertModal(5)" role="button" tabindex="0" aria-label="Git and GitHub Mastery certificate">
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="cert-info"><h4>Digital Marketing</h4><p>Google Digital Garage</p><span>2021</span></div>
+        <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="cert-card" data-aos="fade-up" data-aos-delay="350" onclick="openCertModal(5)" role="button" tabindex="0" aria-label="Git and GitHub Mastery certificate">
+        <div class="cert-preview" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="cert-info"><h4>Cybersecurity Essentials</h4><p>Cisco Networking Academy</p><span>2021</span></div>
         <div class="cert-hover" aria-hidden="true"><i class="fas fa-search-plus"></i></div>
       </div>
     </div>
@@ -592,7 +602,10 @@
     <div class="modal-cert-image-container">
       <img id="modal-cert-image" src="" alt="Certificate" class="modal-cert-image" />
     </div>
-    <h3 id="modal-title"></h3>
+  <h3 id="modal-title">
+  <span id="modal-icon"></span> 
+  <span id="modal-text"></span>
+  </h3>
     <p id="modal-issuer"></p>
     <span id="modal-year"></span>
   </div>
@@ -621,7 +634,7 @@
       </div>
       <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
         <div class="stat-icon" aria-hidden="true"><i class="fas fa-microchip"></i></div>
-        <div class="stat-num counter" data-target="15" aria-label="15+ technologies">0</div>
+        <div class="stat-num counter" data-target="10" aria-label="15+ technologies">0</div>
         <div class="stat-label" data-i18n="stats_tech"></div>
       </div>
     </div>
@@ -669,10 +682,37 @@
         <div class="testimonial-card">
           <div class="test-quote" aria-hidden="true"><i class="fas fa-quote-left"></i></div>
           <p class="test-text" data-i18n="test4_text"></p>
-          <div class="test-rating" aria-label="5 stars">★★★★★</div>
+          <div class="test-rating" aria-label="5 stars">★★★★</div>
           <div class="test-client">
             <div class="test-avatar" aria-hidden="true">BT</div>
             <div><strong data-i18n="test4_name"></strong><span data-i18n="test4_role"></span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-quote" aria-hidden="true"><i class="fas fa-quote-left"></i></div>
+          <p class="test-text" data-i18n="test5_text"></p>
+          <div class="test-rating" aria-label="5 stars">★★★★★</div>
+          <div class="test-client">
+            <div class="test-avatar" aria-hidden="true">MG</div>
+            <div><strong data-i18n="test5_name"></strong><span data-i18n="test5_role"></span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-quote" aria-hidden="true"><i class="fas fa-quote-left"></i></div>
+          <p class="test-text" data-i18n="test6_text"></p>
+          <div class="test-rating" aria-label="5 stars">★★★★</div>
+          <div class="test-client">
+            <div class="test-avatar" aria-hidden="true">BA</div>
+            <div><strong data-i18n="test6_name"></strong><span data-i18n="test6_role"></span></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="test-quote" aria-hidden="true"><i class="fas fa-quote-left"></i></div>
+          <p class="test-text" data-i18n="test7_text"></p>
+          <div class="test-rating" aria-label="5 stars">★★★★★</div>
+          <div class="test-client">
+            <div class="test-avatar" aria-hidden="true">SL</div>
+            <div><strong data-i18n="test7_name"></strong><span data-i18n="test7_role"></span></div>
           </div>
         </div>
       </div>

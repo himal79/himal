@@ -204,14 +204,20 @@ const TRANSLATIONS = {
     test_label:      'ग्राहकको प्रतिक्रिया',
     test_title_what: 'उहाँहरूले',
     test_title:      'के भन्नुहुन्छ',
-    test1_text: 'हिमालले हाम्रो व्यवसायका लागि असाधारण वेबसाइट बनाइदिनुभयो। उहाँको विस्तारप्रतिको ध्यान र प्राविधिक कौशलले हाम्रो अपेक्षाभन्दा बढी गर्यो।',
-    test1_name: 'रमेश कुमार',    test1_role: 'व्यापार मालिक',
-    test2_text: 'व्यावसायिक, भरपर्दो र अविश्वसनीय रूपमा प्रतिभाशाली। हिमालले हाम्रो पुरानो वेबसाइटलाई आधुनिक उत्कृष्ट कृतिमा रूपान्तरण गर्नुभयो।',
-    test2_name: 'सुनिता प्रधान', test2_role: 'मार्केटिङ प्रबन्धक',
-    test3_text: 'हिमालसँग काम गर्नु एउटा अद्भुत अनुभव थियो। उहाँले हाम्रा आवश्यकताहरू राम्ररी बुझ्नुभयो र हामीले माँगेभन्दा बढी दिनुभयो।',
-    test3_name: 'अरुण श्रेष्ठ',  test3_role: 'स्टार्टअप संस्थापक',
-    test4_text: 'अत्यन्त सिफारिस! हिमालको IT परामर्श सेवाले हाम्रो सञ्चालन सुव्यवस्थित गर्न र लागत उल्लेखनीय रूपमा घटाउन सहायता गर्यो।',
-    test4_name: 'बिनिता तामाङ',  test4_role: 'सञ्चालन निर्देशक',
+    test1_text: 'हिमालले हाम्रो IT सम्बन्धी समस्या छिटो र प्रभावकारी रूपमा समाधान गर्नुभयो। उहाँको प्राविधिक ज्ञान, समयमै सहयोग र व्यावसायिक व्यवहारले हामी अत्यन्त सन्तुष्ट छौं।',
+    test1_name: 'रमेश कुमार',    test1_role: 'व्यवस्थापक',
+    test2_text: 'कम्प्युटर सेटअप, सफ्टवेयर स्थापना र नेटवर्क व्यवस्थापन सबै काम व्यवस्थित रूपमा सम्पन्न गर्नुभयो। भविष्यमा पनि उहाँसँग काम गर्न चाहन्छौं।',
+    test2_name: 'सुनिता प्रधान', test2_role: 'कार्यालय प्रशासक',
+    test3_text: 'हाम्रो ब्रान्डका लागि तयार गरिएको डिजाइन र भिडियोहरू आकर्षक तथा व्यावसायिक थिए। अपेक्षाभन्दा उत्कृष्ट परिणाम प्राप्त भयो।',
+    test3_name: 'अरुण श्रेष्ठ',  test3_role: 'ब्रान्ड व्यवस्थापक',
+    test4_text: 'सामाजिक सञ्जालको योजना, सामग्री प्रकाशन र व्यवस्थापन अत्यन्त प्रभावकारी थियो। हाम्रो अनलाइन पहुँच र सहभागिता उल्लेखनीय रूपमा बढ्यो।',
+    test4_name: 'बिनिता तामाङ',  test4_role: 'डिजिटल मार्केटिङ संयोजक',
+    test5_text: 'सिर्जनात्मक सामग्री, पोस्ट डिजाइन र क्याप्सन सबै गुणस्तरीय थिए। समयमै काम सम्पन्न गर्ने उहाँको बानी प्रशंसनीय छ।',
+    test5_name: 'मनिषा गुरुङ',  test5_role: 'कन्टेन्ट व्यवस्थापक',
+    test6_text: 'हाम्रो वेबसाइट आधुनिक, छरितो र प्रयोगकर्ता-मैत्री बनाइदिनुभयो। डिजाइन र कार्यसम्पादन दुवै उत्कृष्ट छन्।',
+    test6_name: 'बिकास अधिकारी',  test6_role: 'व्यवसाय सञ्चालक',
+    test7_text: 'IT Support, Web Development, Design र Social Media सबै क्षेत्रमा उहाँको काम उत्कृष्ट छ। एकै ठाउँबाट सबै डिजिटल सेवा प्राप्त गर्न सकिनु हाम्रो लागि ठूलो फाइदा भयो।',
+    test7_name: 'सन्दीप लामा',  test7_role: 'उद्यमी',
 
     /* Blog */
     blog_label:        'विचार र धारणाहरू',
@@ -373,14 +379,34 @@ const TRANSLATIONS = {
     stats_exp: 'Years Experience', stats_tech: 'Technologies Mastered',
 
     test_label: 'Client Feedback', test_title_what: 'What They', test_title: 'Say',
-    test1_text: 'Himal delivered an exceptional website for our business. His attention to detail and technical skills exceeded our expectations completely.',
-    test1_name: 'Ramesh Kumar',    test1_role: 'Business Owner',
-    test2_text: 'Professional, reliable, and incredibly talented. Himal transformed our outdated website into a modern masterpiece our customers love.',
-    test2_name: 'Sunita Pradhan', test2_role: 'Marketing Manager',
-    test3_text: 'Working with Himal was a fantastic experience. He understood our requirements perfectly and delivered beyond what we asked for.',
-    test3_name: 'Arun Shrestha',  test3_role: 'Startup Founder',
-    test4_text: "Highly recommended! Himal's IT consulting services helped us streamline operations and reduce costs significantly.",
-    test4_name: 'Binita Tamang',  test4_role: 'Operations Director',
+    test1_text: 'Himal resolved our IT-related issues quickly and efficiently. His technical expertise, timely support, and professional approach left us highly satisfied.',
+    test1_name: 'Ramesh Kumar',
+    test1_role: 'Manager',
+
+    test2_text: 'He completed our computer setup, software installation, and network configuration in a well-organized and professional manner. We look forward to working with him again.',
+    test2_name: 'Sunita Pradhan',
+    test2_role: 'Office Administrator',
+
+    test3_text: 'The designs and videos created for our brand were creative and highly professional. The final results exceeded our expectations.',
+    test3_name: 'Arun Shrestha',
+    test3_role: 'Brand Manager',
+
+    test4_text: 'His social media planning, content publishing, and account management were highly effective. Our online reach and audience engagement improved significantly.',
+    test4_name: 'Binita Tamang',
+    test4_role: 'Digital Marketing Coordinator',
+
+    test5_text: 'The creative content, post designs, and captions were all of excellent quality. His ability to deliver work on time is truly commendable.',
+    test5_name: 'Manisha Gurung',
+    test5_role: 'Content Manager',
+
+    test6_text: 'He transformed our website into a modern, fast, and user-friendly platform. Both the design and overall performance are outstanding.',
+    test6_name: 'Bikash Adhikari',
+    test6_role: 'Business Owner',
+
+    test7_text: 'His expertise in IT Support, Web Development, Design, and Social Media Management is exceptional. Having all these digital services in one place has been a great advantage for us.',
+    test7_name: 'Sandeep Lama',
+    test7_role: 'Entrepreneur',
+
 
     blog_label: 'Thoughts & Ideas', blog_title_latest: 'Latest', blog_title: 'Articles',
     blog1_date: 'May 15, 2026', blog1_cat: 'Web Dev',
@@ -903,12 +929,14 @@ function restartTyped(words) {
    13. CERT MODAL
 ================================================================ */
 const CERT_DATA = [
-  { icon: '<i class="fab fa-aws"></i>',        title: 'AWS Cloud Practitioner',     issuer: 'Amazon Web Services',       year: '2023' },
-  { icon: '<i class="fab fa-google"></i>',     title: 'IT Support',          issuer: 'Google / Coursera',         year: '2023' },
-  { icon: '<i class="fab fa-react"></i>',      title: 'React Developer Certificate',issuer: 'Meta / Coursera',           year: '2022' },
-  { icon: '<i class="fab fa-node-js"></i>',    title: 'Node.js Certification',      issuer: 'OpenJS Foundation',         year: '2022' },
-  { icon: '<i class="fas fa-shield-alt"></i>', title: 'Cybersecurity Essentials',   issuer: 'Cisco Networking Academy',  year: '2021' },
-  { icon: '<i class="fab fa-git-alt"></i>',    title: 'Git & GitHub Mastery',       issuer: 'Udemy',                     year: '2021' },
+  { icon: '<i class="fa-solid fa-headset"></i> &nbsp;',        title: 'IT Consulting & Support',     issuer: 'HP LIFE',       year: '2023' },
+  { icon: '<i class="fa-solid fa-network-wired"></i> &nbsp',     title: 'Computer Hardware & Networking',          issuer: 'Cisco Networking Academy',         year: '2023' },
+  { icon: '<i class="fa-solid fa-hashtag"></i> &nbsp',      title: 'Social Media Marketing',issuer: 'HubSpot Academy',           year: '2022' },
+  { icon: '<i class="fa-solid fa-bullhorn"></i> &nbsp',    title: 'Content Marketing',      issuer: 'HubSpot Academy',         year: '2022' },
+  { icon: '<i class="fa-solid fa-palette"></i> &nbsp', title: 'Graphic Design Essentials',   issuer: 'Canva Design School',  year: '2021' },
+  { icon: '<i class="fa-solid fa-code"></i> &nbsp',    title: 'Web Development',       issuer: 'freeCodeCamp',                     year: '2021' },
+  { icon: '<i class="fa-solid fa-chart-line"></i> &nbsp',    title: 'Digital Marketing',       issuer: 'Google Digital Garage',                     year: '2021' },
+  { icon: '<i class="fa-solid fa-shield-halved"></i> &nbsp',    title: 'Cybersecurity Essentials',       issuer: 'Cisco Networking Academy',                     year: '2021' },
 ];
 
 function openCertModal(idx) {
@@ -917,7 +945,7 @@ function openCertModal(idx) {
   if (!modal || !data) return;
   const certImage = document.getElementById('modal-cert-image');
   certImage.src = `assets/certificate/cert-${idx + 1}.png`;
-  document.getElementById('modal-title').textContent  = data.title;
+  document.getElementById('modal-title').innerHTML = `${data.icon} ${data.title}`;
   document.getElementById('modal-issuer').textContent = data.issuer;
   document.getElementById('modal-year').textContent   = data.year;
   modal.classList.add('open');
