@@ -116,6 +116,194 @@ All translations are in `script.js` (lines 41-409) in the `TRANSLATIONS` object:
 - `en` key: English translations
 - Add new languages by copying a block and adding a new key
 
+### Portfolio Section Redesign
+
+**Overview:**
+The Portfolio section has been redesigned with a modern card-based layout matching the Skills and Services sections. The section showcases seven focus areas aligned with the service offerings:
+
+1. **IT Support & Troubleshooting** - Windows, Linux, and networking expertise
+2. **Digital Content & Design** - Graphic design, video editing, and content creation
+3. **Social Media Management** - Social media handling, content, and analytics
+4. **Computer Hardware & Installation** - Hardware installation, management, and maintenance
+5. **Websites & Web Solutions** - Attractive and user-friendly website development
+6. **Software Development** - Customized software, database, and API solutions
+7. **Web & Software Development** - Full-stack development with React and Node.js (final addition)
+
+**Design Features:**
+- **Consistent Color Scheme**: Matches Skills and Services sections with same palette, gradients, and shadows
+- **Hover Animations**: Cards lift up (translateY -6px) with enhanced shadow effects and glow
+- **Gradient Top Border**: Animated gradient bar on hover (scaleX transform)
+- **Icon Styling**: Icons with background that transitions to gradient on hover
+- **Tech Stack Badges**: Semi-transparent badges that transition to gradient on hover
+- **Responsive Grid Layout**: Auto-adjusting columns (minmax 380px) with max-width 1400px container
+- **Smooth Transitions**: All interactions use the existing CSS transition system
+- **Clickable Links**: Each portfolio card is an anchor link to the Services section
+
+**Bilingual Content:**
+- Portfolio items support both Nepali and English
+- Default language is Nepali (as per project default)
+- Language toggle switches all portfolio content dynamically
+- Translation keys: `port1_title`, `port1_desc`, `port2_title`, `port2_desc`, etc. (up to port7)
+
+**Implementation Details:**
+- HTML: Located in `index.html` (lines 339-432)
+- CSS: Located in `style.css` (lines 625-674)
+- JavaScript: Translation keys in `script.js` (lines 152-166 for Nepali, lines 364-378 for English)
+
+**Customization:**
+To modify portfolio items, edit the translation keys in `script.js`:
+```javascript
+/* Nepali translations */
+port1_title: 'IT समर्थन र समस्या समाधान',
+port1_desc:  'विन्डोज, लिनक्स र नेटवर्किङ समस्याहरू समाधान गर्ने विशेषज्ञ।',
+port5_title: 'कम्प्युटर हार्डवेयर र स्थापना',
+port5_desc:  'हार्डवेयर स्थापना, व्यवस्थापन र रखरखाव सेवा।',
+
+/* English translations */
+port1_title: 'IT Support & Troubleshooting',
+port1_desc:  'Expert in solving Windows, Linux, and networking issues.',
+port5_title: 'Computer Hardware & Installation',
+port5_desc:  'Hardware installation, management, and maintenance services.',
+```
+
+To change link destinations, modify the `href` attribute in `index.html`:
+```html
+<a href="#services" class="portfolio-card">
+```
+
+### Hero Section Responsiveness Fixes
+
+**Overview:**
+The Hero section has been enhanced with improved responsiveness for the bio paragraph and social links to prevent text cropping and icon overflow on smartphones and tablets.
+
+**Hero Bio Paragraph:**
+- **Element**: `<p class="hero-bio" data-i18n="hero_bio"></p>`
+- **Responsive Font Scaling**: Uses `clamp(0.9rem, 2vw, 1.05rem)` for smooth scaling across devices
+- **Line Height**: Added `line-height: 1.7` for better readability and text wrapping
+- **Max Width**: Maintains `max-width: 520px` on desktop, expands to `100%` on mobile
+- **Text Wrapping**: Ensures proper word wrapping without overflow or cropping
+
+**Hero Social Links:**
+- **Element**: `<div class="hero-social" role="list" aria-label="Social links">`
+- **Flex Wrap**: Added `flex-wrap: wrap` to allow icons to wrap neatly on narrow viewports
+- **Max Width**: Constrained to `max-width: 400px` on desktop, expands to `100%` on mobile
+- **Gap Spacing**: Maintains `gap: 0.75rem` for consistent icon spacing
+- **Alignment**: Centers icons on mobile (`justify-content: center` in media query)
+- **Hover Effects**: Preserves existing hover animations, glow effects, and transitions
+
+**Implementation Details:**
+- CSS: Located in `style.css` (lines 292-297 for hero-bio, lines 304-308 for hero-social)
+- Mobile Media Query: Located in `style.css` (lines 1088-1093)
+
+**Responsive Behavior:**
+- **Desktop (768px+)**: hero-bio max-width 520px, hero-social max-width 400px
+- **Mobile/Tablet (<768px)**: Both expand to 100% width with centered alignment
+- **Small Mobile (<480px)**: Font sizes scale down further via clamp function
+
+**Customization:**
+To adjust the bio text size, modify the clamp values in `style.css`:
+```css
+.hero-bio {
+  font-size: clamp(0.9rem, 2vw, 1.05rem); /* min, preferred, max */
+}
+```
+
+To adjust social icon spacing, modify the gap value:
+```css
+.hero-social {
+  gap: 0.75rem; /* Increase for more spacing, decrease for tighter layout */
+}
+```
+
+### Loader and Navbar Logo Enhancements
+
+**Overview:**
+The logo images in the Loader and Navbar sections have been enhanced with improved centering, reduced spacing, increased size, and enhanced dark/light mode visibility filters for better branding consistency.
+
+**Loader Logo:**
+- **Element**: `<div class="loader-logo"><img src="assets/images/logo.png" alt="HTt Logo" /></div>`
+- **Image Source**: `assets/images/logo.png`
+- **Responsive Sizing**: Uses `clamp(80px, 20vw, 150px)` for smooth scaling across devices
+- **Centering**: Horizontally and vertically centered using flexbox and auto margins
+- **Spacing**: Reduced margin-bottom from 1.5rem to 1rem for closer text positioning
+- **Animation**: Maintains existing pulse animation (scale and opacity)
+- **Dark Mode**: Applies `brightness(1.2) contrast(1.05)` filter for enhanced visibility
+- **Light Mode**: Applies `brightness(0.95) contrast(1.02)` filter for better contrast
+- **Accessibility**: Preserves `role="status"` and `aria-label="Loading"` on parent container
+
+**Navbar Logo:**
+- **Element**: `<a href="#home" class="nav-logo" aria-label="Home"><img src="assets/images/logo.png" alt="HTt Logo" /><span class="accent">.</span></a>`
+- **Image Source**: `assets/images/logo.png`
+- **Size**: 70px × 70px on desktop, 55px × 55px on mobile (increased from 60px/50px)
+- **Accent Dot**: Styled with color: var(--c3), font-size: 1.5rem desktop, 1.35rem mobile
+- **Alignment**: Centers within navbar using flexbox with gap spacing
+- **Dark Mode**: Applies `brightness(1.2) contrast(1.05)` filter for enhanced visibility
+- **Light Mode**: Applies `brightness(0.95) contrast(1.02)` filter for better contrast
+- **Accessibility**: Preserves `aria-label="Home"` on anchor link
+
+**Implementation Details:**
+- HTML: Located in `index.html` (lines 58 for loader, line 76 for navbar)
+- CSS: Located in `style.css` (lines 100-112 for loader-logo, lines 179-195 for nav-logo)
+- Dark Mode Filter: Located in `style.css` (lines 58-61)
+- Mobile Media Query: Located in `style.css` (lines 1108-1109)
+
+**Responsive Behavior:**
+- **Desktop (768px+)**: loader-logo clamp(80px, 20vw, 150px), nav-logo 70px
+- **Mobile (<768px)**: loader-logo scales via clamp, nav-logo 55px
+- **Image Scaling**: Uses `object-fit: contain` to maintain aspect ratio
+- **Smooth Transitions**: Filter changes use existing CSS transition system
+
+**Customization:**
+To change the logo image, update the `src` attribute in `index.html`:
+```html
+<!-- Loader -->
+<div class="loader-logo"><img src="assets/images/your-logo.png" alt="Your Logo" /></div>
+
+<!-- Navbar -->
+<a href="#home" class="nav-logo" aria-label="Home"><img src="assets/images/your-logo.png" alt="Your Logo" /><span class="accent">.</span></a>
+```
+
+To adjust logo sizes and spacing, modify the values in `style.css`:
+```css
+/* Loader logo - responsive sizing */
+.loader-logo {
+  width: clamp(80px, 20vw, 150px); /* min, preferred, max */
+  height: clamp(80px, 20vw, 150px);
+  margin: 0 auto 1rem; /* Spacing below logo */
+}
+
+/* Navbar logo image */
+.nav-logo img {
+  width: 70px; height: 70px; /* Desktop size */
+}
+
+/* Navbar accent dot */
+.nav-logo .accent {
+  font-size: 1.5rem; /* Desktop size */
+}
+
+/* Mobile sizes in media query */
+@media (max-width: 768px) {
+  .nav-logo img { width: 55px; height: 55px; }
+  .nav-logo .accent { font-size: 1.35rem; }
+}
+```
+
+To adjust dark/light mode visibility, modify the filter values:
+```css
+/* Dark mode (default) - enhanced visibility */
+.loader-logo img,
+.nav-logo img {
+  filter: brightness(1.2) contrast(1.05); /* Brighter with contrast */
+}
+
+/* Light mode override - better contrast */
+[data-theme="light"] .loader-logo img,
+[data-theme="light"] .nav-logo img {
+  filter: brightness(0.95) contrast(1.02); /* Slightly darker with contrast */
+}
+```
+
 ## Usage
 
 ### Editing Styles (style.css)
