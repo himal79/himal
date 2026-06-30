@@ -304,6 +304,114 @@ To adjust dark/light mode visibility, modify the filter values:
 }
 ```
 
+### Navbar Hamburger Menu Fix
+
+**Overview:**
+The hamburger menu button has been fixed to properly toggle between hamburger icon (three lines) and cross icon (X) when opening/closing the mobile navigation menu. The JavaScript now correctly applies the CSS class that triggers the icon transformation.
+
+**Hamburger Button Behavior:**
+- **Element**: `<button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links" type="button">`
+- **Closed State**: Shows three horizontal lines (hamburger icon)
+- **Open State**: Transforms to X (cross) icon with smooth animation
+- **Accessibility**: Updates `aria-label` and `aria-expanded` attributes dynamically
+
+**Implementation Details:**
+- HTML: Located in `index.html` (lines 99-101)
+- CSS: Located in `style.css` (lines 229-248)
+- JavaScript: Located in `script.js` (lines 637-663)
+
+**CSS Transformation:**
+- Uses CSS transforms to animate span elements into X shape
+- First span: `translateY(7px) rotate(45deg)` - rotates to diagonal
+- Second span: `opacity: 0; transform: scaleX(0)` - fades out
+- Third span: `translateY(-7px) rotate(-45deg)` - rotates to opposite diagonal
+- All transitions use existing `var(--transition)` for smooth animation
+
+**JavaScript Updates:**
+- Changed class toggle from `active` to `open` to match CSS selector
+- Added dynamic `aria-label` updates: "Open menu" when closed, "Close menu" when open
+- Maintains `aria-expanded` state updates for screen readers
+- Closes menu on link click and outside click with proper state reset
+
+**Responsive Behavior:**
+- Hamburger button displays only on mobile (`display: flex` in media query at 768px)
+- Aligns properly within nav-actions container
+- No cropping or misalignment on mobile devices
+- Smooth menu open/close animations
+
+**Customization:**
+To adjust hamburger button styling, modify in `style.css`:
+```css
+.hamburger {
+  padding: 8px; /* Button padding */
+  background: var(--surface); /* Background color */
+  border: 1px solid var(--border); /* Border styling */
+}
+
+.hamburger span {
+  width: 24px; /* Line width */
+  height: 2px; /* Line height */
+  gap: 5px; /* Spacing between lines */
+}
+```
+
+To adjust cross icon animation, modify the transform values:
+```css
+.hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg); /* Top line */
+}
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg); /* Bottom line */
+}
+```
+
+### Navbar Mobile Menu Alignment Fix
+
+**Overview:**
+The mobile hamburger menu alignment and active element underline positioning have been fixed to ensure proper spacing, alignment, and visual consistency across all devices.
+
+**Mobile Menu Alignment:**
+- **Padding**: Reduced from `1.5rem 2rem` to `1.5rem 1.5rem` for better viewport fit
+- **Gap**: Increased from `0.25rem` to `0.5rem` for better item separation
+- **Nav-link Padding**: Increased from `0.75rem 0` to `1rem 0.5rem` for better touch targets
+- **Scroll Support**: Added `max-height: calc(100vh - var(--nav-h))` and `overflow-y: auto` to handle long menus
+- **Alignment**: Maintains left-aligned text with proper spacing from edges
+
+**Active Element Underline:**
+- **Position**: Changed from `bottom: -2px` to `bottom: 0` for direct text alignment
+- **Behavior**: Underline now sits directly beneath the active link text
+- **Animation**: Maintains smooth expand/collapse animation (left/right from 50% to 10%)
+
+**Implementation Details:**
+- CSS: Located in `style.css` (lines 208-212 for underline, lines 1103-1115 for mobile menu)
+
+**Responsive Behavior:**
+- **Desktop (768px+)**: Horizontal navigation with centered underline
+- **Mobile (<768px)**: Vertical dropdown menu with proper spacing and scroll support
+- **All Devices**: Underline positioned directly beneath text for consistency
+
+**Customization:**
+To adjust mobile menu spacing, modify in `style.css`:
+```css
+@media (max-width: 768px) {
+  .nav-links {
+    padding: 1.5rem 1.5rem; /* Menu container padding */
+    gap: 0.5rem; /* Spacing between menu items */
+  }
+  .nav-link {
+    padding: 1rem 0.5rem; /* Individual item padding */
+  }
+}
+```
+
+To adjust underline positioning, modify in `style.css`:
+```css
+.nav-link::after {
+  bottom: 0; /* Position directly beneath text */
+  height: 2px; /* Underline thickness */
+}
+```
+
 ## Usage
 
 ### Editing Styles (style.css)
@@ -374,14 +482,145 @@ typed_words: ['IT Engineer', 'Web Developer', 'Your New Role'],
 - Float tags hidden on mobile for cleaner layout
 - Form padding reduced on mobile devices
 
+## Final Optimizations & Enhancements
+
+### Code Cleanup
+
+**Removed Unused Code:**
+- Removed unused portfolio filter JavaScript function (`initPortfolioFilter`) that referenced non-existent `.project-card` elements
+- Removed empty CSS rule `[data-lang="en"] .lang-label { }` that had no effect
+- All remaining CSS and JavaScript is actively used and functional
+
+**Benefits:**
+- Reduced JavaScript file size by ~18 lines of unused code
+- Eliminated potential confusion from non-functional portfolio filter
+- Cleaner, more maintainable codebase
+
+### Performance Enhancements
+
+**Image Lazy Loading:**
+- Critical images (loader logo, navbar logo) use `loading="eager"` for immediate display
+- Non-critical images (profile images in hero and about sections) use `loading="lazy"` for deferred loading
+- Improves initial page load time by prioritizing above-the-fold content
+
+**Implementation:**
+```html
+<!-- Critical images - load immediately -->
+<img src="assets/images/logo.png" alt="HTt Logo" loading="eager" />
+
+<!-- Non-critical images - load when needed -->
+<img src="assets/images/profile.png" alt="Himal Thapa Profile" loading="lazy" />
+```
+
+**Existing Performance Features:**
+- Lazy-loaded external resources (CSS, icons via media="print" onload)
+- Will-change optimization for animated elements only
+- Efficient CSS transitions with hardware acceleration
+- No JavaScript frameworks – minimal overhead
+- Particle canvas pauses when tab is hidden (visibilitychange event)
+
+### SEO & Indexing
+
+**Sitemap.xml:**
+- Created comprehensive sitemap covering all major sections
+- Includes homepage, all section anchors (#home, #about, #skills, etc.)
+- Configured with appropriate priority levels (1.0 for home, 0.6-0.9 for sections)
+- Set lastmod date to 2026-06-30
+- Configured change frequencies (weekly for home/blog, monthly for other sections)
+
+**Robots.txt:**
+- Allows all crawlers to access the site
+- Disallows private directories (/admin/, /private/, /assets/certificate/)
+- Includes sitemap reference for search engines
+- Sets crawl-delay of 1 second for respectful crawling
+
+**Enhanced Meta Tags:**
+- Added comprehensive keywords including IT Support, Web Development, Digital Content
+- Added language meta tag specifying Nepali and English
+- Added geographic metadata (geo.region: NP-BAG, geo.placename: Kathmandu)
+- Added canonical URL to prevent duplicate content issues
+- Enhanced Open Graph tags with image dimensions, locale, and site name
+- Enhanced Twitter Card tags with site and creator handles
+- Added hreflang tags for multilingual SEO (ne, en, x-default)
+
+**Implementation Details:**
+- Files created: `sitemap.xml`, `robots.txt`
+- Meta tags updated in `index.html` (lines 10-41)
+- Hreflang tags support Nepali (ne) and English (en) with x-default fallback
+
+### Accessibility & Best Practices
+
+**ARIA Labels and Roles:**
+- All interactive elements have appropriate ARIA labels
+- Navigation has `role="navigation"` and `aria-label="Main navigation"`
+- Social links have `role="list"` and individual `aria-label` attributes
+- Loader has `role="status"` and `aria-label="Loading"`
+- Modal has `role="dialog"`, `aria-modal="true"`, and `aria-labelledby`
+- Testimonial navigation has `role="tablist"` and `aria-label`
+- All buttons have appropriate `aria-label` or text content
+
+**Keyboard Navigation:**
+- All interactive elements are keyboard accessible
+- Focus visible outlines implemented with `:focus-visible` pseudo-class
+- Modal closes on Escape key press
+- Cert cards respond to Enter and Space keys
+- Smooth scroll behavior for anchor links
+- Tab order follows logical document structure
+
+**Contrast Ratios:**
+- WCAG AA compliant color contrast ratios maintained
+- Dark mode: Enhanced text colors (#f0f4f8, #9ca3b8) on dark backgrounds (#0a0e17)
+- Light mode: Enhanced text colors (#1a1f2e, #4b5563) on light backgrounds (#fafbff)
+- Logo filters adjusted for visibility in both modes (brightness/contrast)
+- All interactive elements have sufficient contrast for accessibility
+
+**Additional Accessibility Features:**
+- Reduced motion support via `prefers-reduced-motion` media query
+- Custom cursor disabled on touch devices
+- Screen reader friendly with semantic HTML
+- Alt text provided for all images
+- Form validation with accessible error messages
+
+### Maintenance Instructions
+
+**Updating Sitemap:**
+- Edit `sitemap.xml` when adding new sections or pages
+- Update `lastmod` date when making significant changes
+- Adjust `priority` and `changefreq` based on content importance
+
+**Updating Robots.txt:**
+- Add disallow rules for any new private directories
+- Update sitemap URL if domain changes
+- Adjust crawl-delay if server load is a concern
+
+**Updating Meta Tags:**
+- Update Open Graph image URL when creating new og-image.jpg
+- Update Twitter handles when social media accounts change
+- Update geographic metadata if location changes
+- Add new hreflang tags when adding more languages
+
+**Monitoring Performance:**
+- Use browser DevTools Network tab to monitor load times
+- Check Lighthouse scores for performance, accessibility, and SEO
+- Monitor Google Search Console for indexing issues
+- Test lazy loading behavior on slow connections
+
+**Testing Accessibility:**
+- Use keyboard-only navigation to verify all features work
+- Test with screen reader (NVDA, JAWS, VoiceOver)
+- Check contrast ratios with online tools (WebAIM Contrast Checker)
+- Verify focus indicators are visible on all interactive elements
+
 ## Notes
 
 ### Performance
 
 - Lazy-loaded external resources (CSS, icons)
+- Image lazy loading for non-critical content
 - Will-change optimization for animated elements
 - Efficient CSS transitions with hardware acceleration
 - No JavaScript frameworks – minimal overhead
+- Particle canvas pauses when tab is hidden
 
 ### Accessibility
 
@@ -391,6 +630,7 @@ typed_words: ['IT Engineer', 'Web Developer', 'Your New Role'],
 - Focus visible outlines
 - Screen reader friendly
 - WCAG AA color contrast compliance
+- Reduced motion support
 
 ### Browser DevTools
 

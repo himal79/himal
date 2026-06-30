@@ -43,7 +43,7 @@ const TRANSLATIONS = {
   /* ─────────────────────────── NEPALI ─────────────────────── */
   np: {
     /* Page metadata */
-    page_title:   'हिमाल थापा | IT इन्जिनियर र वेब डेभलपर',
+    page_title:   'हिमाल थापा | IT इन्जिनियर',
     page_desc:    'हिमाल थापा – IT इन्जिनियर, वेब डेभलपर र सफ्टवेयर डेभलपर। मेरो पोर्टफोलियो अन्वेषण गर्नुहोस्।',
 
     /* Loader */
@@ -293,7 +293,7 @@ const TRANSLATIONS = {
 
   /* ─────────────────────────── ENGLISH ────────────────────── */
   en: {
-    page_title:  'Himal Thapa | IT Engineer & Web Developer',
+    page_title:  'Himal Thapa | IT Engineer',
     page_desc:   'Himal Thapa – IT Engineer, Web Developer & Software Developer based in Nepal.',
 
     loader_text: 'Initialising Portfolio…',
@@ -368,19 +368,12 @@ const TRANSLATIONS = {
     port2_desc:  'Graphic design, video editing, and content creation.',
     port3_title: 'Social Media Management',
     port3_desc:  'Social media handling, content, and analytics.',
-    port4_title: 'Web & Software Development',
-    port4_desc:  'Building modern websites and software solutions.',
     port5_title: 'Computer Hardware & Installation',
     port5_desc:  'Hardware installation, management, and maintenance services.',
     port6_title: 'Websites & Web Solutions',
     port6_desc:  'Creating attractive and user-friendly website development.',
     port7_title: 'Software Development',
     port7_desc:  'Customized software, database, and API solutions.',
-    proj4_desc:  'Comprehensive system for managing students, teachers, and schedules.',
-    proj5_title: 'News Portal',
-    proj5_desc:  'Dynamic news aggregator with category filtering and search functionality.',
-    proj6_title: 'Weather Dashboard',
-    proj6_desc:  'Real-time weather app with forecasts and interactive charts.',
 
     exp_label: 'My Journey', exp_title_work: 'Work', exp_title: 'Experience',
     exp1_title: 'IT Engineer', exp1_year: '2026 – Present', exp1_company:'Sanatan Media Group',
@@ -645,23 +638,26 @@ window.addEventListener('load', () => {
   if (burger && navLinks) {
     burger.addEventListener('click', () => {
       const open = navLinks.classList.toggle('open');
-      burger.classList.toggle('active', open);
+      burger.classList.toggle('open', open);
       burger.setAttribute('aria-expanded', String(open));
+      burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     });
     /* Close on link click */
     navLinks.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
-        burger.classList.remove('active');
+        burger.classList.remove('open');
         burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Open menu');
       });
     });
     /* Close on outside click */
     document.addEventListener('click', e => {
       if (!nav.contains(e.target)) {
         navLinks.classList.remove('open');
-        burger.classList.remove('active');
+        burger.classList.remove('open');
         burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-label', 'Open menu');
       }
     });
   }
@@ -855,26 +851,6 @@ function restartTyped(words) {
 })();
 
 
-/* ================================================================
-   10. PORTFOLIO FILTER
-================================================================ */
-(function initPortfolioFilter() {
-  const btns  = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.project-card');
-  btns.forEach(btn => {
-    btn.addEventListener('click', function() {
-      btns.forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const filter = this.dataset.filter;
-      cards.forEach(card => {
-        const show = filter === 'all' || card.dataset.category === filter;
-        card.style.display     = show ? '' : 'none';
-        card.style.opacity     = show ? '1' : '0';
-        card.style.transform   = show ? 'scale(1)' : 'scale(0.95)';
-      });
-    });
-  });
-})();
 
 
 /* ================================================================
