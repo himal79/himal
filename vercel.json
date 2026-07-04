@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/public_assets/(.*)",
+      "source": "/(.*)",
       "headers": [
         { "key": "Accept-Ranges", "value": "none" }
       ]
