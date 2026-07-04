@@ -1,0 +1,16 @@
+# Robots.txt for Himal Thapa Portfolio
+# Allow all crawlers to access the site
+
+User-agent: *
+Allow: /
+
+# Disallow admin or private directories (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /assets/certificate/
+
+# Sitemap location
+Sitemap: https://himal522.com.np/sitemap.xml
+
+# Crawl-delay (optional, respectful crawling)
+Crawl-delay: 1
