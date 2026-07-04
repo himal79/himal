@@ -1,0 +1,10 @@
+{
+  "headers": [
+    {
+      "source": "/public_assets/(.*)",
+      "headers": [
+        { "key": "Accept-Ranges", "value": "none" }
+      ]
+    }
+  ]
+}
