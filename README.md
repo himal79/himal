@@ -599,6 +599,119 @@ typed_words: ['IT Engineer', 'Web Developer', 'Your New Role'],
 - Update geographic metadata if location changes
 - Add new hreflang tags when adding more languages
 
+### Open Graph (OG) Image Setup
+
+**Overview:**
+The portfolio includes comprehensive Open Graph meta tags for optimal social media preview on Facebook, LinkedIn, Twitter, and other platforms. The OG image setup includes primary and fallback images with proper dimensions and metadata.
+
+**Current OG Image Configuration:**
+
+**Primary OG Image:**
+- **File**: `public_assets/og-im.png`
+- **URL**: `https://himal522.com.np/public_assets/og-im.png`
+- **Dimensions**: 1200x630 pixels (Facebook recommended size)
+- **Type**: PNG
+- **Alt Text**: "Himal Thapa Portfolio - IT Engineer & Developer"
+
+**Fallback OG Image:**
+- **File**: `public_assets/icon-512.png`
+- **URL**: `https://himal522.com.np/public_assets/icon-512.png`
+- **Dimensions**: 512x512 pixels
+- **Type**: PNG
+- **Alt Text**: "Himal Thapa Portfolio Logo"
+- **Purpose**: Serves as backup if primary image fails to load
+
+**Meta Tags Implementation:**
+```html
+<!-- Primary OG Image -->
+<meta property="og:image" content="https://himal522.com.np/public_assets/og-im.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="Himal Thapa Portfolio - IT Engineer & Developer" />
+
+<!-- Fallback OG Image -->
+<meta property="og:image" content="https://himal522.com.np/public_assets/icon-512.png" />
+<meta property="og:image:width" content="512" />
+<meta property="og:image:height" content="512" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:alt" content="Himal Thapa Portfolio Logo" />
+```
+
+**Twitter Card Consistency:**
+Twitter card tags mirror OG tags for consistent social previews:
+```html
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://himal522.com.np/public_assets/og-im.png" />
+<meta name="twitter:image:alt" content="Himal Thapa Portfolio - IT Engineer & Developer" />
+```
+
+**Absolute URL Requirement:**
+- All OG image URLs must use absolute URLs (full domain path)
+- Relative URLs (e.g., `/public_assets/og-im.png`) will not work for social media crawlers
+- Ensure domain is correct: `https://himal522.com.np/`
+
+**Facebook Crawler Testing:**
+To verify OG image displays correctly on Facebook:
+
+1. **Facebook Sharing Debugger:**
+   - Visit: https://developers.facebook.com/tools/debug/
+   - Enter your URL: `https://himal522.com.np/`
+   - Click "Debug" to see how Facebook interprets your meta tags
+   - Check "Scrape Again" if you've recently updated the image
+
+2. **Expected Results:**
+   - OG image should display at 1200x630 pixels
+   - Title: "Himal Thapa | IT Engineer"
+   - Description: Full portfolio description
+   - Site name: "Himal Thapa Portfolio"
+
+3. **Common Issues:**
+   - If image doesn't appear: Check absolute URL is accessible
+   - If old image shows: Clear Facebook cache using "Scrape Again"
+   - If dimensions wrong: Verify image is exactly 1200x630 pixels
+
+**Caching Considerations:**
+- Facebook caches OG data for up to 30 days
+- Use Facebook Sharing Debugger to force cache refresh
+- Other platforms (LinkedIn, Twitter) have similar caching
+- Update `lastmod` date in sitemap.xml after OG image changes
+
+**Server Requirements:**
+Ensure your server allows Facebook crawler access:
+- No authentication required for `public_assets/` directory
+- Proper MIME types served for PNG files (`image/png`)
+- No partial content responses (full image must be served)
+- Accept requests from Facebook crawler user agent
+
+**Mobile Preview Compatibility:**
+- OG image dimensions (1200x630) work on both desktop and mobile
+- Facebook automatically scales for mobile devices
+- Fallback image (512x512) ensures square preview if needed
+- Test on actual mobile devices for final verification
+
+**Creating New OG Images:**
+When replacing the OG image:
+1. Create image at 1200x630 pixels (PNG or JPG)
+2. Save as `public_assets/og-im.png` (or update meta tag with new filename)
+3. Update meta tag URL in `index.html` if filename changes
+4. Test with Facebook Sharing Debugger
+5. Clear cache on other social platforms if needed
+
+**Image Best Practices:**
+- Use PNG or JPG format (PNG recommended for text/graphics)
+- Keep file size under 5MB for faster loading
+- Include important text/branding in center 80% (safe zone)
+- Use high contrast for readability on small previews
+- Test on both light and dark backgrounds
+
+**Multilingual Support:**
+OG tags support both Nepali and English:
+- Primary locale: `ne_NP` (Nepali)
+- Alternate locale: `en_US` (English)
+- Description text works in both languages
+- Image should be language-neutral or include both languages
+
 **Monitoring Performance:**
 - Use browser DevTools Network tab to monitor load times
 - Check Lighthouse scores for performance, accessibility, and SEO
