@@ -9,6 +9,9 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /assets/certificate/
 
+# Allow resume files for indexing
+Allow: /assets/files/
+
 # Sitemap location
 Sitemap: https://himal522.com.np/sitemap.xml
 

@@ -712,6 +712,104 @@ OG tags support both Nepali and English:
 - Description text works in both languages
 - Image should be language-neutral or include both languages
 
+### Bilingual Resume Download
+
+**Overview:**
+The resume download button in the Hero section automatically switches between language-specific resume files based on the current language selection. This ensures users download the resume in their preferred language.
+
+**File Naming Convention:**
+- **Nepali Resume**: `assets/files/htcvn.pdf` (HT = Himal Thapa, CV = Curriculum Vitae, N = Nepali)
+- **English Resume**: `assets/files/htcve.pdf` (HT = Himal Thapa, CV = Curriculum Vitae, E = English)
+
+**Implementation Details:**
+
+**HTML Structure:**
+```html
+<a id="resume-download-btn" class="btn btn-primary magnetic" download aria-label="Download CV">
+  <i class="fas fa-download" aria-hidden="true"></i>
+  <span data-i18n="btn_resume"></span>
+</a>
+```
+
+**JavaScript Logic:**
+Located in `script.js` (lines 542-549):
+```javascript
+/** Update resume download link based on current language */
+function updateResumeDownloadLink(lang) {
+  const resumeBtn = document.getElementById('resume-download-btn');
+  if (!resumeBtn) return;
+  
+  const resumeFile = lang === 'np' ? 'assets/files/htcvn.pdf' : 'assets/files/htcve.pdf';
+  resumeBtn.href = resumeFile;
+}
+```
+
+**Language Switching:**
+- Function called on page load to set initial resume file
+- Function called whenever language toggle is clicked
+- Instant switching without page reload
+- Language preference saved to localStorage for persistence
+
+**Behavior:**
+- **Nepali Mode (default)**: Downloads `htcvn.pdf`
+- **English Mode**: Downloads `htcve.pdf`
+- **Button Text**: Changes based on language (CV डाउनलोड / Download CV)
+- **Accessibility**: Maintains `aria-label="Download CV"` for screen readers
+
+**Performance:**
+- Instant file path update (no network request)
+- No page reload required
+- Minimal JavaScript overhead
+- Works on all devices (mobile, tablet, desktop)
+
+**Adding New Language-Specific Resumes:**
+To add support for additional languages:
+
+1. **Create new resume file** following naming convention:
+   - Hindi: `assets/files/htcvh.pdf`
+   - Spanish: `assets/files/htcvs.pdf`
+   - Format: `htcv[L].pdf` where L is language code
+
+2. **Update JavaScript function** in `script.js`:
+```javascript
+function updateResumeDownloadLink(lang) {
+  const resumeBtn = document.getElementById('resume-download-btn');
+  if (!resumeBtn) return;
+  
+  const resumeFiles = {
+    'np': 'assets/files/htcvn.pdf',
+    'en': 'assets/files/htcve.pdf',
+    'hi': 'assets/files/htcvh.pdf',  // Add new language
+    'es': 'assets/files/htcvs.pdf'   // Add new language
+  };
+  
+  resumeBtn.href = resumeFiles[lang] || resumeFiles['np'];
+}
+```
+
+3. **Update language toggle** to include new language option in `script.js` (line 549)
+
+4. **Add translations** for button text in `TRANSLATIONS` object
+
+**File Placement:**
+- Resume files must be in: `assets/files/` directory
+- Ensure files are publicly accessible (no authentication required)
+- Use PDF format for universal compatibility
+- Keep file sizes reasonable for fast downloads
+
+**Testing:**
+1. Load page in default (Nepali) mode - verify `htcvn.pdf` downloads
+2. Click language toggle to switch to English - verify `htcve.pdf` downloads
+3. Refresh page - verify language preference persists
+4. Test on mobile devices - verify download works correctly
+5. Test with screen reader - verify accessibility labels work
+
+**Troubleshooting:**
+- **Wrong file downloads**: Check language state in localStorage
+- **Download fails**: Verify file exists in correct directory
+- **Button not updating**: Check JavaScript console for errors
+- **Language not persisting**: Verify localStorage is enabled
+
 **Monitoring Performance:**
 - Use browser DevTools Network tab to monitor load times
 - Check Lighthouse scores for performance, accessibility, and SEO

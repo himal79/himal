@@ -539,11 +539,21 @@ function applyTranslations(lang) {
   currentValidationLang = lang;
 }
 
+/** Update resume download link based on current language */
+function updateResumeDownloadLink(lang) {
+  const resumeBtn = document.getElementById('resume-download-btn');
+  if (!resumeBtn) return;
+  
+  const resumeFile = lang === 'np' ? 'assets/files/htcvn.pdf' : 'assets/files/htcve.pdf';
+  resumeBtn.href = resumeFile;
+}
+
 /** Init the language toggle button */
 function initLangToggle() {
   const btn = document.getElementById('lang-toggle');
   if (!btn) return;
   applyTranslations(currentLang);
+  updateResumeDownloadLink(currentLang);
 
   btn.addEventListener('click', () => {
     const next = currentLang === 'np' ? 'en' : 'np';
@@ -557,6 +567,7 @@ function initLangToggle() {
     });
 
     applyTranslations(next);
+    updateResumeDownloadLink(next);
   });
 }
 
@@ -568,6 +579,7 @@ window.addEventListener('load', () => {
   const loader = document.getElementById('loader');
   if (!loader) return;
   applyTranslations(currentLang); // apply lang before showing
+  updateResumeDownloadLink(currentLang); // set correct resume file on load
   setTimeout(() => {
     loader.classList.add('hide');
     loader.setAttribute('aria-hidden', 'true');
