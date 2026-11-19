@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ID Card Maker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f5f4f0; --panel:#ffffff; --text:#1d1d1b; --muted:#6b6a65; --line:#dcdad2; --accent:#b4321e; --accent-text:#ffffff;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#161614; --panel:#201f1d; --text:#f1efe8; --muted:#a3a198; --line:#3a3935; --accent:#e0644f; --accent-text:#161614;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161614; --panel:#201f1d; --text:#f1efe8; --muted:#a3a198; --line:#3a3935; --accent:#e0644f; --accent-text:#161614;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Mukta','Noto Sans Devanagari',system-ui,sans-serif;font-size:16px;line-height:1.4}
+.app{max-width:1100px;margin:0 auto;padding:20px 16px 32px;display:grid;gap:20px;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);align-items:start}
+@media (max-width:820px){.app{grid-template-columns:1fr}}
+h1{grid-column:1/-1;margin:0;font-size:1.5rem;font-weight:700}
+h1 small{display:block;font-size:.9rem;font-weight:400;color:var(--muted)}
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px}
+canvas{max-width:100%;height:auto;display:block;margin:0 auto;border-radius:10px;background:#222}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:14px}
+label{display:grid;gap:5px;font-size:.85rem;font-weight:600;color:var(--muted)}
+input[type=text],input[type=url],input[type=number]{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}
+input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 84px;gap:10px;align-items:end}
+.row input[type=range]{width:100%;accent-color:var(--accent)}
+.inline{display:flex;gap:8px}
+.inline input{flex:1;min-width:0}
+button,.btn{padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit;font-weight:600;cursor:pointer;white-space:nowrap}
+button.primary{background:var(--accent);color:var(--accent-text);border-color:var(--accent)}
+input[type=file]{display:none}
+.status{font-size:.8rem;min-height:1.2em;color:var(--muted)}
+.status.err{color:var(--accent)}
+input[type=color]{width:100%;height:38px;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:2px}
+</style>
+</head>
+<body>
+<main class="app">
+  <h1>ID Card Maker <small>Live preview · Nepali (देवनागरी) supported</small></h1>
+
+  <section class="stage">
+    <canvas id="card" width="1011" height="638" aria-label="Identity card preview"></canvas>
+  </section>
+
+  <section class="panel">
+    <!-- Background image: keep cf.jpg in the same folder as this HTML file (hidden; used only for the canvas) -->
+    <img id="bgImg" src="cf.jpg" alt="" hidden>
+    <div class="status" id="status" role="status"></div>
+
+    <label>Name
+      <input type="text" id="name" value="Himal Sharma" placeholder="e.g. हिमाल शर्मा">
+    </label>
+    <div class="row">
+      <label>Name size
+        <input type="range" id="nameSizeR" min="20" max="140" value="72">
+      </label>
+      <input type="number" id="nameSize" min="20" max="140" value="72" aria-label="Name font size">
+    </div>
+
+    <label>Location
+      <input type="text" id="loc" value="Kathmandu, Nepal" placeholder="e.g. काठमाडौं, नेपाल">
+    </label>
+    <div class="row">
+      <label>Location size
+        <input type="range" id="locSizeR" min="14" max="100" value="40">
+      </label>
+      <input type="number" id="locSize" min="14" max="100" value="40" aria-label="Location font size">
+    </div>
+
+    <label>Text color <input type="color" id="color" value="#ffffff"></label>
+
+    <button class="primary" id="dl" type="button">Download PNG</button>
+  </section>
+</main>
+
+<script>
+(function(){
+  var FONT = "'Mukta','Noto Sans Devanagari',sans-serif";
+  var bgEl = document.getElementById('bgImg');
+  var canvas = document.getElementById('card');
+  var ctx = canvas.getContext('2d');
+  var W = canvas.width, H = canvas.height;
+  var $ = function(id){ return document.getElementById(id); };
+  var statusEl = $('status');
+  var bgImg = null;
+  var fontsReady = false;
+
+  function setStatus(msg, err){
+    statusEl.textContent = msg || '';
+    statusEl.className = 'status' + (err ? ' err' : '');
+  }
+
+  function drawBackground(){
+    if (bgImg) {
+      // cover-fit
+      var s = Math.max(W / bgImg.naturalWidth, H / bgImg.naturalHeight);
+      var w = bgImg.naturalWidth * s, h = bgImg.naturalHeight * s;
+      ctx.drawImage(bgImg, (W - w) / 2, (H - h) / 2, w, h);
+    } else {
+      var g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, '#1f3a5f');
+      g.addColorStop(1, '#7a2e3b');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+    }
+    // legibility scrim
+    var sc = ctx.createLinearGradient(0, H * 0.35, 0, H);
+    sc.addColorStop(0, 'rgba(0,0,0,0)');
+    sc.addColorStop(1, 'rgba(0,0,0,0.65)');
+    ctx.fillStyle = sc;
+    ctx.fillRect(0, 0, W, H);
+  }
+
+  function fitText(text, size, weight, maxW){
+    // shrink only if text would overflow the card
+    ctx.font = weight + ' ' + size + 'px ' + FONT;
+    var w = ctx.measureText(text).width;
+    return w > maxW ? Math.max(8, Math.floor(size * maxW / w)) : size;
+  }
+
+  function render(){
+    ctx.clearRect(0, 0, W, H);
+    drawBackground();
+    if (!fontsReady) return;
+
+    var color = $('color').value;
+    var name = $('name').value.trim();
+    var loc = $('loc').value.trim();
+    var nSize = Math.max(8, +$('nameSize').value || 72);
+    var lSize = Math.max(8, +$('locSize').value || 40);
+    var pad = Math.round(Math.min(W, H) * 0.08), maxW = W - pad * 2;
+
+    ctx.textBaseline = 'alphabetic';
+    ctx.textAlign = 'left';
+    ctx.fillStyle = color;
+    ctx.shadowColor = 'rgba(0,0,0,0.55)';
+    ctx.shadowBlur = Math.max(4, Math.round(H * 0.012));
+    ctx.shadowOffsetY = 2;
+
+    var locY = H - pad;
+    var nameY = locY - lSize * 1.5;
+
+    if (loc) {
+      var ls = fitText(loc, lSize, 400, maxW);
+      ctx.font = '400 ' + ls + 'px ' + FONT;
+      ctx.fillText(loc, pad, locY);
+    }
+    if (name) {
+      var ns = fitText(name, nSize, 700, maxW);
+      ctx.font = '700 ' + ns + 'px ' + FONT;
+      ctx.fillText(name, pad, nameY);
+    }
+    ctx.shadowColor = 'transparent';
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetY = 0;
+  }
+
+  function applyImage(){
+    if (!bgEl.naturalWidth) return;
+    bgImg = bgEl;
+    // canvas takes the image's full natural size
+    W = canvas.width = bgEl.naturalWidth;
+    H = canvas.height = bgEl.naturalHeight;
+    var ns = Math.round(H * 0.11), ls = Math.round(H * 0.06), mx = Math.round(H / 2);
+    $('nameSizeR').max = $('nameSize').max = mx;
+    $('locSizeR').max = $('locSize').max = mx;
+    $('nameSizeR').value = $('nameSize').value = ns;
+    $('locSizeR').value = $('locSize').value = ls;
+    setStatus('Image size: ' + W + ' × ' + H + ' px');
+    render();
+  }
+  function imageFailed(){
+    setStatus('Background image couldn’t be loaded. Make sure cf.jpg is in the same folder as this HTML file.', true);
+  }
+
+  // Sync slider <-> number inputs
+  function link(rangeId, numId){
+    var r = $(rangeId), n = $(numId);
+    r.addEventListener('input', function(){ n.value = r.value; render(); });
+    n.addEventListener('input', function(){ if (n.value !== '') { r.value = n.value; } render(); });
+  }
+  link('nameSizeR', 'nameSize');
+  link('locSizeR', 'locSize');
+
+  ['name', 'loc', 'color'].forEach(function(id){
+    $(id).addEventListener('input', render);
+  });
+
+
+  $('dl').addEventListener('click', function(){
+    try {
+      var a = document.createElement('a');
+      a.download = 'id-card.png';
+      a.href = canvas.toDataURL('image/png');
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } catch (err) {
+      setStatus('Export blocked: the browser treats this image as cross-origin. Open the page through a local server (e.g. VS Code Live Server) instead of file://.', true);
+    }
+  });
+
+  // Draw a first frame, then wait for fonts (incl. Devanagari glyphs) before text
+  render();
+  bgEl.addEventListener('load', applyImage);
+  bgEl.addEventListener('error', imageFailed);
+  if (bgEl.complete) { if (bgEl.naturalWidth) applyImage(); else imageFailed(); }
+  var sample = 'हिमाल Aa काठमाडौं';
+  Promise.all([
+    document.fonts.load('700 48px Mukta', sample),
+    document.fonts.load('400 48px Mukta', sample),
+    document.fonts.load('400 48px "Noto Sans Devanagari"', sample)
+  ]).catch(function(){}).then(function(){
+    return document.fonts.ready;
+  }).then(function(){
+    fontsReady = true;
+    render();
+  });
+})();
+</script>
+</body>
+</html>
