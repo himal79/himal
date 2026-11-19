@@ -160,12 +160,12 @@ var centerX = W / 2;
     if (loc) {
       var ls = fitText(loc, lSize, 400, maxW);
       ctx.font = '400 ' + ls + 'px ' + FONT;
-      ctx.fillText(loc, pad, locY);
+      ctx.fillText(loc, centerX, locY);
     }
     if (name) {
       var ns = fitText(name, nSize, 700, maxW);
       ctx.font = '700 ' + ns + 'px ' + FONT;
-      ctx.fillText(name, pad, nameY);
+      ctx.fillText(name, centerX, nameY);
     }
     ctx.shadowColor = 'transparent';
     ctx.shadowBlur = 0;
